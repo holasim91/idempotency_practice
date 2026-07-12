@@ -1,0 +1,172 @@
+/* ===== 실습 페이지 레이아웃 ===== */
+
+.upload-page {
+  width: min(560px, 100% - 48px);
+  margin: 0 auto;
+  padding: 64px 0 80px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ===== 헤더 ===== */
+
+.page-header {
+  text-align: center;
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: var(--accent);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 32px;
+    letter-spacing: -0.8px;
+    margin: 0 0 8px;
+  }
+
+  p {
+    font-size: 15px;
+  }
+}
+
+/* ===== 카드 공통 ===== */
+
+.upload-card,
+.records-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+/* ===== 업로드 카드 ===== */
+
+.upload-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.file-field input[type='file'] {
+  width: 100%;
+  box-sizing: border-box;
+  font: 14px/1.4 var(--sans);
+  color: var(--text);
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+  padding: 20px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &:hover {
+    border-color: var(--accent-border);
+    background: var(--accent-bg);
+  }
+
+  &::file-selector-button {
+    font: 600 14px var(--sans);
+    color: var(--accent);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-right: 14px;
+    cursor: pointer;
+  }
+}
+
+.upload-button {
+  font: 600 16px var(--sans);
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  padding: 13px 16px;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.05s;
+
+  &:hover {
+    filter: brightness(1.08);
+  }
+  &:active {
+    transform: scale(0.985);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  &:disabled {
+    filter: grayscale(0.6) opacity(0.55);
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+/* ===== 레코드 카드 ===== */
+
+.records-card {
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    margin: 0 0 16px;
+  }
+
+  .record-count {
+    font: 600 13px var(--mono);
+    color: var(--accent);
+    background: var(--accent-bg);
+    border-radius: 999px;
+    min-width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+  }
+}
+
+.records-empty {
+  font-size: 14px;
+  text-align: center;
+  padding: 24px 0;
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+}
+
+.record-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.record-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: var(--code-bg);
+
+  code {
+    font-size: 12px;
+    padding: 2px 6px;
+  }
+}
