@@ -4,23 +4,28 @@ import "./App.css";
 type UploadFile = { id: string; fileName: string };
 
 function App() {
-  const [file, setFiles] = useState<File | null>();
+  const [file, setFiles] = useState<File | null>(null);
   const [uploadList, setUploadList] = useState<UploadFile[]>([]);
   const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [idempotencyKey, setIdempotencyKey]=useState<string | null>(null)
+
 
   const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFiles(event.target.files?.[0] ?? null);
+    setIdempotencyKey(crypto.randomUUID()) // 멱등키 생성
   };
   const handleUpload = async () => {
-    if (!file) return; 
+    if (!file || !idempotencyKey) return; 
 
-    const id = crypto.randomUUID();
-    const fileName = file.name;
-    const newRecord = { id, fileName };
     setIsUploading(true);
+    const form = new FormData()
+    form.append('file', file)
+   
     try {
-      await new Promise((r) => setTimeout(r, 1500));
-      setUploadList((prev) => [...prev, newRecord]);
+      const response = await fetch("http://localhost:3000/upload",{method:"POST", body: form, headers: { 'Idempotency-Key': idempotencyKey }}) // 멱등키는 헤더에 담아서 보낸다
+  
+      const data = await response.json()
+      setUploadList(data.records);
     } catch (error) {
       console.error(error);
     } finally {
